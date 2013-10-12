@@ -1,0 +1,107 @@
+body {
+	background-color: rgba(138,151,119,0.87);
+}
+
+#conteiner {
+	text-align: center;
+	margin: 0px auto;
+	width: 700px; /* Ширина блока */
+}
+
+#game_place {
+/* 	margin: 0px auto; */
+	float: left;
+	height: 400px; /* Высота блока */
+	width: 400px; /* Ширина блока */
+	background-color: rgba(94,156,248,0.81);
+	border: 4px solid #00125c;
+	border-radius: 11px;
+}
+
+.gm {
+	margin: 0px auto;
+	height: 408px; /* Высота блока */
+	width: 610px; /* Ширина блока */
+	background-color: rgba(176,160,66,0.68);
+}
+.inp {
+	text-align: left;
+	color: blue;
+}
+
+.cell {
+	float: left;
+	background-color:#dfc5e8;
+	height: 98px;
+	width: 98px;
+	border: 1px solid black;
+	border-radius: 8px;
+	text-align: center;
+	font-size: 80px;
+	cursor: pointer;
+	-moz-user-select: none;
+	-khtml-user-select: none;
+	-webkit-user-select: none;
+	-o-user-select: none;
+	user-select: none;
+	z-index: -1;
+}
+
+#cell_not {
+	
+	background-color:rgba(255,0,0,0);
+	border-color: rgba(255,255,255,0);
+	
+}
+
+#flap {
+	position: absolute;
+	height: 400px;
+	width: 400px;
+	background-color:rgba(28,28,28,0.57);
+	border-radius: 8px;
+}
+
+#time {
+	background-color:red;
+	height: 20px;
+	width: 192px;
+	border-radius: 8px;
+}
+
+.rating {
+	float: left;
+	background-color: rgba(94,156,248,0.81);
+	height: 400px;
+	width: 192px;
+	border: 4px solid #00125c;
+	border-radius: 11px;
+}
+
+#res_time {
+	margin: 0px auto;
+	height: 358px; /* Высота блока */
+	width: 182px; /* Ширина блока */
+	background-color: rgba(176,65,158,0.68);
+	border-radius: 8px;
+	padding: 5px;
+	padding-top: 18px;
+	
+}
+
+#title {
+	background-color: rgba(117,205,234,0.64);
+	height: 0px; /* Высота блока */
+	width: 182px; /* Ширина блока */
+	text-decoration: underline;
+	color: #0e1abb;
+}
+
+.name_and_time {
+	float: left;
+	height: 20px; /* Высота блока */
+	width: 180px; /* Ширина блока */
+	background-color: rgba(162,203,86,0.64);
+	border-radius: 10px;
+	border: 1px solid #b373c0;
+}
