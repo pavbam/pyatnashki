@@ -8,9 +8,9 @@ var test_str = "cell_1,cell_2,cell_3,cell_4,cell_5,cell_6,cell_7,cell_8,cell_9,c
 var ms_start = undefined;
 var sec = "", min = "";
 /* выводимая строка при правильном расскладе фишек */
-var win_text = "ПОЗДРАВЛЯЕМ\nВы справились за ";
-var name_text = "\nвведите ваше имя для сохранения результата!\nВНИМАНИЕ!!!\nЕсли не будет введено имя, то результат будет потерян!";
+var win_text = "ПОЗДРАВЛЯЕМ<br />Вы справились за ";
 var base_url = 'http://localhost:8888/pyatnashki/';
+var names;
 /* ФУНКЦИЯ получегия случайного целого числа из диапазона */
 function random(min, max) {
     var range = max - min + 1;
@@ -45,21 +45,22 @@ function removeChildren(node) {
 
 /* ФУНКЦИЯ создания нового поля игры */
 function newGame(arr) {
-	if (arr === true) {
-		window.location.reload();
-		return;
-	}
+	document.getElementById("flap").style.display ="none";
+	names = 'false';
+	myAjax(minutes, seconds, false);
+	
 	stop();
 	seconds = 0, minutes = 0, hours = 0;
 	back_arr = [ [], [], [], [] ]; // очищаем массив - таблицу
 	ms_start = undefined;
-	win_text = "ПОЗДРАВЛЯЕМ\nВы справились за ";
+	
 //	start_arr = shuffle(arr); // перемешиваем массив ячеек
 	var game_place = document.getElementById("game_place");
 	removeChildren(game_place);	// удаляем все дочерние эллементы
-	myAjax(false, false, false);
+	
+	
 	/* вписываем эллементы (фишки) в страницу */
-	/* фишки с номерами щт 1 до 15 */
+	/* фишки с номерами от 1 до 15 */
 	for (var c = 0; c < 15; c++) {
 		var div = document.createElement('div');
 		div.className = 'cell';
@@ -68,6 +69,7 @@ function newGame(arr) {
 		div.setAttribute("onclick", "moveCell(id, className)");
 		game_place.appendChild(div);
 	}
+	
 	/* фишка отвечающая за пустую ячейку */
 	var div_false = document.createElement('div');
 	div_false.className = 'cell';
@@ -75,13 +77,9 @@ function newGame(arr) {
 	div_false.id = "cell_not";
 	div_false.setAttribute("onclick", "moveCell(id, className)");
 	game_place.appendChild(div_false);
+	
 	/* запоминаем позиции в массиве - таблице */
 	copuInBackArr (back_arr);
-	/* создаем поле накрывающее фишки в конце игры от случайных нажатий */
-	var div_flap = document.createElement('div');
-	div_flap.id = "flap";
-	div_flap.style.display ="none";
-	game_place.appendChild(div_flap);
 }
 
 /* ФУНКЦИЯ копирования id эллементов в массив - таблицу */
@@ -100,13 +98,6 @@ function copuInBackArr (arr) {
 
 /* ФУНКЦИЯ обработки нажатия на фишку */
 function moveCell(id_first, name){
-	/* запоминаем время начала игры */
-	if (ms_start == undefined) {
-		ms_start = true;
-		start();
-	}
-	
-	
 	
 	/* координаты нажатой фишки */
 	var y = name[5], x = name[7];
@@ -122,6 +113,13 @@ function moveCell(id_first, name){
 		var id = back_arr[ y_arr[i] ][ x_new[i] ];
 		/* если фишка пустая то меняем местами */
 		if (id === "cell_not") {
+			
+			/* запускасем таймер */
+			if (ms_start == undefined) {
+				ms_start = true;
+				start();
+			}
+			
 			/* получаем атрибуты */
 			var div_first_position = document.getElementById(id_first);
 			var div_new_position = document.getElementById(id);
@@ -147,15 +145,16 @@ function moveCell(id_first, name){
 			
 				/* если не управился в 60 сек. добавляем значение: минуты */
 				if (minutes > 0) {				
-					win_text = win_text + minutes + " мин. " + seconds + " сек.";
+					win_text = win_text + minutes + " мин. " + seconds + " сек.\nвведите ваше имя для сохранения результата!";
 				} else win_text = win_text + seconds + "сек.";
-				setTimeout("seconds = 0, minutes = 0", 160);
 				setTimeout('document.getElementById("time").innerHTML = "<strong>Новая игра</strong>"', 150);
 				/* выводим поздравления и колличество затраченного времени с небольшой задержкой */
 				setTimeout('aj(minutes, seconds)', 150);
 				/* закрываем поле для предотвращения случайных нажатий */
 				div_flap = document.getElementById("flap");
+				
 				setTimeout('div_flap.style.display ="block"', 140);
+				setTimeout('document.getElementById("div_form").style.display ="block"', 160);
 			}
 			return 0;
 		} 
@@ -163,16 +162,93 @@ function moveCell(id_first, name){
 }
 
 function aj(minutes, seconds) {
-	var response = prompt(win_text + name_text, null);
-	if (!response == null || !response == "") {
 
-		myAjax(response, minutes, seconds);
-	}
-	else console.log("false");  // ! CONSOLE ! 
+	document.getElementById("div_message").innerHTML = win_text;
+	document.getElementById('inp_inp_name').focus();
+	win_text = "ПОЗДРАВЛЯЕМ<br />Вы справились за ";
+
 }
 
+function myAjax(minutes, seconds, inp) {
+	
+	var names = false;
+	if (inp == undefined) {
+		var temp = document.getElementById("inp_inp_name").value;
+		if (temp == "") {
+			alert("Забыли ввести имя!");
+			return;
+		} else names = temp;
+		
+	}
+//	else names = false;
+	
+	
+	$.ajax({
+			type: "post",
+			url: base_url + "index.php/ajax/upd_bd",
+			cache: false,				
+			data: {
+				name: names,
+				min: minutes,
+				sec: seconds
+			},
+			success: function(json) {						
+				try{		
+					var obj = jQuery.parseJSON(json);
+					show_rating(obj);
+				}catch(e) {		
+					alert('Exception while request..');
+				}		
+			},
+			error: function() {						
+				alert('Error while request..');
+			}
+	});
+	
+	document.getElementById("div_form").style.display ="none";
+	
+	seconds = 0;
+	minutes = 0;
+}
 
+function show_rating(obj) {
 
+	var result = document.getElementById('res_time');
+	removeChildren(result);
+	
+	for (var i = 0; i < obj.length; i++) {
+		var div = document.createElement('div');
+		var value = obj[i].name + " : " + obj[i].time;
+		div.setAttribute('class', 'name_and_time');
+		div.setAttribute('id', 'id_' + i);
+		div.innerHTML = value;
+		result.appendChild(div);
+	}
+	
+}
+
+function newSet() {
+	stop();
+	seconds = 0, minutes = 0, hours = 0;
+	back_arr = [ [], [], [], [] ]; // очищаем массив - таблицу
+	ms_start = undefined;
+//	win_text = "ПОЗДРАВЛЯЕМ\nВы справились за ";
+//	start_arr = shuffle(arr); // перемешиваем массив ячеек
+	var game_place = document.getElementById("game_place");
+	removeChildren(game_place);	// удаляем все дочерние эллементы
+}
+
+function keyDown(event) {
+   var key = event.keyCode;
+   if (key==13) {
+   		myAjax(minutes, seconds, undefined);
+   }
+   if (key==27) {
+   		document.getElementById('div_form').style.display ='none';
+   		event.preventDefault();//запрет на дальнейшее распространение
+   		return false;//возвращаем false
+   }
+}
 
 
 

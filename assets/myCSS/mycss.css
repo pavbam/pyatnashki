@@ -22,7 +22,7 @@ body {
 	margin: 0px auto;
 	height: 408px; /* Высота блока */
 	width: 610px; /* Ширина блока */
-	background-color: rgba(176,160,66,0.68);
+	background-color: rgba(82,65,176,0);
 }
 .inp {
 	text-align: left;
@@ -56,13 +56,14 @@ body {
 
 #flap {
 	position: absolute;
-	height: 400px;
-	width: 400px;
+	height: 408px;
+	width: 408px;
 	background-color:rgba(28,28,28,0.57);
 	border-radius: 8px;
 }
 
 #time {
+	cursor: pointer;
 	background-color:red;
 	height: 20px;
 	width: 192px;
@@ -105,3 +106,35 @@ body {
 	border-radius: 10px;
 	border: 1px solid #b373c0;
 }
+
+#div_form {
+	margin: 0px auto;
+	margin-top: 120px;
+	border: 4px groove #6a0ba5;
+	border-radius: 15px;
+	background-color: rgba(76,190,200,0.64);
+	height: 150px; /* Высота блока */
+	width: 300px; /* Ширина блока */
+}
+
+#div_message, #div_in_name{
+	font-size: larger;
+	font-style: italic;
+	font-weight: bold;
+	background-color: rgba(76,189,199,0);
+	height: 50px; /* Высота блока */
+	width: 280px; /* Ширина блока */
+	color: blue;
+	
+
+}
+#inp_inp_name {
+	width: 100px; /* Ширина блока */
+}
+#massege {
+	margin: 0px auto;
+	margin-top: 24px;
+	height: 50px; /* Высота блока */
+	width: 280px; /* Ширина блока */
+}
+

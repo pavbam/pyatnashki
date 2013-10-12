@@ -14,8 +14,13 @@ class Ajax extends CI_Controller {
 		
 		$this->load->model('result_model');
         $back_value = $this->result_model->get_rating();
-		
 		echo json_encode($back_value) ;	
+	}
+	
+	function get_db() {
+		$this->load->model('result_model');
+        $back_value = $this->result_model->get_rating();
+		echo json_encode($back_value);
 	}
 
 }		
