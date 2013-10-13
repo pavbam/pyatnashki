@@ -211,6 +211,32 @@ function myAjax(minutes, seconds, inp) {
 	minutes = 0;
 }
 
+/* открытие и закрытие панелей */
+var rating = false;
+var radio_i = false;
+function rating_move(id) {
+	var rat = document.getElementById(id);
+	if (id == "rating") {
+		if (rating == false) {
+			rat.style.right = "83px";
+			setTimeout('document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/close.png"', 400);
+			rating = true;
+		} else {
+			rat.style.right = "274px";
+			setTimeout('document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/open.png"', 400);
+			rating = false;
+		}
+	} else {
+		if (radio_i == false) {
+			rat.style.top = "426px";
+			radio_i = true;
+		} else {
+			rat.style.top = "262px";
+			radio_i = false;
+		}
+	}
+}
+
 function show_rating(obj) {
 
 	var result = document.getElementById('res_time');
@@ -218,10 +244,24 @@ function show_rating(obj) {
 	
 	for (var i = 0; i < obj.length; i++) {
 		var div = document.createElement('div');
-		var value = obj[i].name + " : " + obj[i].time;
+		
+		var colon = document.createElement('div');
+		colon.setAttribute('class', 'colon');
+		var login = document.createElement('div');
+		login.setAttribute('class', 'login');
+		var res_time = document.createElement('div');
+		res_time.setAttribute('class', 'res_time');
+		
+		colon.innerHTML = ":";
+		login.innerHTML = obj[i].name;
+		res_time.innerHTML = obj[i].time;
+		
+		div.appendChild(login);
+		div.appendChild(colon);
+		div.appendChild(res_time);		
 		div.setAttribute('class', 'name_and_time');
 		div.setAttribute('id', 'id_' + i);
-		div.innerHTML = value;
+		
 		result.appendChild(div);
 	}
 	

@@ -10,21 +10,8 @@
     </head>
     <body onload="newGame(start_arr)">
     	
-        	<script>
-            var rating = false;
-            
-			function rating_move() {
-				var rat = document.getElementById("rating");
-				if (rating == false) {
-					rat.style.right = "83px";
-					
-					rating = true;
-				} else {
-					rat.style.right = "274px";
-					rating = false;
-				}
-				
-			}
+<script>
+
 			
 			</script>
 
@@ -35,14 +22,14 @@
 		    	<img class="img3" src="<?=base_url();?>assets/img/bort3.png">
 			    <div id="head">
 			    	<div id="intime">
-		            	<div id="time" onclick="newGame(start_arr)">
+		            	<div id="time" title="нажать для начала новой игры" onclick="newGame(start_arr)">
 				    		<strong>Новая игра</strong>
 				    	</div>
 					</div>
 					<img class="img" src="<?=base_url();?>assets/img/bort.png">
 				</div>
 		        <div id="game_place">
-
+					<!-- пятнашки -->
 		        </div>
 	        	<div id="flap" style="display: none">
 		        	<div id="div_form" style="display: none">
@@ -54,11 +41,19 @@
 					        	<div id="div_buttons">
 						        	<input id="inp_not" type="button" value="отказаться" onclick="document.getElementById('div_form').style.display ='none'">
 						        	<input id="inp_ok" type="button" value="отправить" onclick="myAjax(minutes, seconds, undefined)">
+						        	
 					        	</div>
 					        	
 				        	</div>
 			        	</div>
 		        	</div>
+	        	</div>
+	        	
+	        	<div id="radio">
+		        	<iframe frameborder="1" scrolling="no" src="http://lovi.fm/mini/?c=4&a=0&r=1&h=165&s=1093,1274,1351,1704,673,255,1523,1624,35,1247,92">
+		        	</iframe>
+					<img class="img2" src="<?=base_url();?>assets/img/bort2.png">
+					<img class="radio" title="радио" src="<?=base_url();?>assets/img/radio.png" onclick="rating_move('radio')">
 	        	</div>
 		       
 				<div class="rating" id="rating">
@@ -69,13 +64,16 @@
 						<div id="res_time">
 						</div>
 					</div>
-					<img class="img1" src="<?=base_url();?>assets/img/bort1.png" onclick="rating_move()">
+					<img class="img1" title="результаты" src="<?=base_url();?>assets/img/bort1.png">
+					
+					<img class="open_png" name="open_png" title="результаты" src="<?=base_url();?>assets/img/open.png" onclick="rating_move('rating')">
 				</div>
 				
-				<img class="img2" src="<?=base_url();?>assets/img/bort2.png" onclick="rating_move()">
+				
 				
 				
 			</div>
+			
 
     </body>
 </html>

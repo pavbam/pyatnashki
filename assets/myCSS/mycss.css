@@ -7,7 +7,7 @@ body {
 		margin: 0px auto;
 		height: 500px; /* Высота блока */
 		width: 700px; /* Ширина блока */
-		background-color: rgba(82,65,176,0.21);
+		background-color: rgba(255,255,255,0);
 		
 	}	h1 {
 			text-align: center;
@@ -156,7 +156,7 @@ body {
 					position: inherit;
 					float: left;
 					background-color: rgba(105,159,222,1);
-					border-right: 2px;
+/* 					border-right: 2px; */
 					height: 400px; /* Высота блока */
 					width: 192px; /* Ширина блока */
 					border: 4px solid #00125c;
@@ -184,27 +184,99 @@ body {
 						padding-top: 23px;
 						
 					}	.name_and_time {
-							text-align: center;
+							text-align: left;
 							float: left;
 							height: 20px; /* Высота блока */
 							width: 180px; /* Ширина блока */
 							background-color: rgba(162,203,86,0.64);
 							border-radius: 10px;
 							border: 1px solid #b373c0;
-						}
+						}	.login {
+								float: left;
+								height: 20px; /* Высота блока */
+								width: 100px; /* Ширина блока */
+								text-indent: 20px;
+								text-shadow: 3px 3px 3px white;
+								color: #005d4f;
+							}
+							.colon {
+								float: left;
+								height: 20px; /* Высота блока */
+								width: 10px; /* Ширина блока */
+								
+							}
+							.res_time {
+								float: left;
+								height: 20px; /* Высота блока */
+								width: 70px; /* Ширина блока */
+								text-shadow: 3px 3px 3px white;
+							}
 						
 				.img1 {
 					position: relative;
 					float: right;
-					
 					margin-top: 6px;
 					margin-right: 2px;
+					z-index: 4;
+				}
+				
+				.open_png {
+					position: relative;
+					float: right;
+					margin-top: 192px;
+					margin-right: -25px;
+					cursor: pointer;
+					z-index: 6;
+				}
+				
+			#radio {
+				position: absolute;
+				height: 165px; /* Высота блока */
+				width: 400px; /* Ширина блока */
+				border: 4px solid #00125c;
+				border-bottom-left-radius: 5px;
+				border-bottom-right-radius: 5px;
+				top: 262px;
+				/* Переход */
+			     -webkit-transition: top 0.3s ease-out 0.1s;
+			     -moz-transition: top 0.3s ease-out 0.1s;
+			     -o-transition: top 0.3s ease-out 0.1s;
+			     transition: top 0.3s ease-out 0.1s;
+				
+
+				
+			}  	iframe {
+					position: absolute;
+					border: 1px solid #00135d;
+					overflow: hidden;
+					height: 163px;
+					width: 398px; 
+					z-index: 2;
+				}
+				
+				.img2 {
+					position: relative;
+					margin-left: -2px;
+					top: 167px;
+					height: 30px; /* Высота блока */
+					width: 402px; /* Ширина блока */
+					z-index: 3;
+				}
+				
+				.radio {
+					position: relative;
+					height: 20px; /* Высота блока */
+					width: 80px; /* Ширина блока */
+					float: left;
+					margin-top: 135px;
+					margin-left: 160px;
+					cursor: pointer;
 					z-index: 4;
 				}
 		
 
 
-.img2, .img {
+.img {
 	height: 30px; /* Высота блока */
 	width: 398px; /* Ширина блока */
 }
@@ -214,11 +286,7 @@ body {
 	width: 30px; /* Ширина блока */
 }
 
-.img2 {
-	position: absolute;
-	margin-left: 6px;
-	top: 433px;
-}
+
 
 
 
