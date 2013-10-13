@@ -9,16 +9,7 @@
 		</script>
 	</head>
 	<body>
-		<!--
-<?php foreach($rating as $item):?>
-						<?php foreach($item as $i):?>
-								<script>
-									var name = <?=$i['name'];?>;
-									var 
-								</script><?=$i;?>					
-						<?php endforeach;?>				
-		<?php endforeach;?>
--->
+
 		<?php 
 		
 		print_r($ra);

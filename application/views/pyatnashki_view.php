@@ -11,16 +11,36 @@
     <body onload="newGame(start_arr)">
     	
         	<script>
-            var rating = {};
+            var rating = false;
             
-			
+			function rating_move() {
+				var rat = document.getElementById("rating");
+				if (rating == false) {
+					rat.style.right = "83px";
+					
+					rating = true;
+				} else {
+					rat.style.right = "274px";
+					rating = false;
+				}
+				
+			}
 			
 			</script>
 
         <div id="conteiner">
             <h1>Игра "Пятнашки"</h1>
-            	        
+            
 		    <div class="gm">
+		    	<img class="img3" src="<?=base_url();?>assets/img/bort3.png">
+			    <div id="head">
+			    	<div id="intime">
+		            	<div id="time" onclick="newGame(start_arr)">
+				    		<strong>Новая игра</strong>
+				    	</div>
+					</div>
+					<img class="img" src="<?=base_url();?>assets/img/bort.png">
+				</div>
 		        <div id="game_place">
 
 		        </div>
@@ -40,19 +60,21 @@
 			        	</div>
 		        	</div>
 	        	</div>
-		        <div class="inp">
+		       
+				<div class="rating" id="rating">
+		    		<div id="inrating">
+						<div id="title">
+							Лучшие результаты:
+						</div>
+						<div id="res_time">
+						</div>
+					</div>
+					<img class="img1" src="<?=base_url();?>assets/img/bort1.png" onclick="rating_move()">
 				</div>
-
-				<div class="rating">
-		    		<div id="time" onclick="newGame(start_arr)">
-		    			<strong>Новая игра</strong>
-					</div>
-					<div id="title">
-						Лучшие результаты:
-					</div>
-					<div id="res_time">
-					</div>
-				</div>
+				
+				<img class="img2" src="<?=base_url();?>assets/img/bort2.png" onclick="rating_move()">
+				
+				
 			</div>
 
     </body>

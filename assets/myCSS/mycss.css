@@ -1,140 +1,234 @@
 body {
 	background-color: rgba(138,151,119,0.87);
-}
-
-#conteiner {
-	text-align: center;
-	margin: 0px auto;
-	width: 700px; /* Ширина блока */
-}
-
-#game_place {
-/* 	margin: 0px auto; */
-	float: left;
-	height: 400px; /* Высота блока */
-	width: 400px; /* Ширина блока */
-	background-color: rgba(94,156,248,0.81);
-	border: 4px solid #00125c;
-	border-radius: 11px;
-}
-
-.gm {
-	margin: 0px auto;
-	height: 408px; /* Высота блока */
-	width: 610px; /* Ширина блока */
-	background-color: rgba(82,65,176,0);
-}
-.inp {
-	text-align: left;
-	color: blue;
-}
-
-.cell {
-	float: left;
-	background-color:#dfc5e8;
-	height: 98px;
-	width: 98px;
-	border: 1px solid black;
-	border-radius: 8px;
-	text-align: center;
-	font-size: 80px;
-	cursor: pointer;
-	-moz-user-select: none;
-	-khtml-user-select: none;
-	-webkit-user-select: none;
-	-o-user-select: none;
-	user-select: none;
-	z-index: -1;
-}
-
-#cell_not {
 	
-	background-color:rgba(255,0,0,0);
-	border-color: rgba(255,255,255,0);
-	
+}	#conteiner {
+		position: relative;
+		float: right 25%;
+		margin: 0px auto;
+		height: 500px; /* Высота блока */
+		width: 700px; /* Ширина блока */
+		background-color: rgba(82,65,176,0.21);
+		
+	}	h1 {
+			text-align: center;
+			color: blue;
+		}
+		
+		.gm {
+			position: inherit;
+			float: right 25%;
+			margin: 0px auto;
+			height: 445px; /* Высота блока */
+			width: 408px; /* Ширина блока */
+			background-color: rgba(82,65,176,0);
+			
+		}	.img3 {
+				position: absolute;
+				float: left;
+				margin-top: 35px;
+					margin-left: -28px;
+			}
+
+			
+			#head {
+				position: inherit;
+				background-color: rgba(199,76,199,0);
+				text-align: center;
+				height: 25px; /* Высота блока */
+				width: 408px; /* Ширина блока */
+				z-index: 0;
+				
+			}	#intime {
+					position: absolute;
+					height: 20px;
+					width: 408px;
+					margin-top: 7px;
+					
+				}	#time {
+						text-align: center;
+						margin: 0px auto;
+						cursor: pointer;
+						height: 20px;
+						width: 192px;			
+					}
+					
+							/* ------------------------------ */
+			#game_place {
+				position: inherit;
+				margin-top: 2px;
+				height: 400px; /* Высота блока */
+				width: 400px; /* Ширина блока */
+				background-color: rgba(153,89,205,1);
+				border: 4px solid #00125c;
+				border-radius: 11px;
+				z-index: 4;
+				
+			}	.cell {
+					float: left;
+					background-color:#dfc5e8;
+					height: 98px;
+					width: 98px;
+					border: 1px solid black;
+					border-radius: 8px;
+					text-align: center;
+					font-size: 80px;
+					cursor: pointer;
+					-moz-user-select: none;
+					-khtml-user-select: none;
+					-webkit-user-select: none;
+					-o-user-select: none;
+					user-select: none;
+
+				}
+				
+				#cell_not {
+					
+					background-color:rgba(255,255,255,0);
+					border-color: rgba(255,255,255,0);
+					
+				}
+			/* ------------------------------ */
+			#flap {
+				position: absolute;
+				height: 408px;
+				width: 408px;
+				margin-top: -408px;
+				background-color:rgba(28,28,28,0.57);
+				border-radius: 10px;
+				z-index: 20;
+				
+			}	#div_form {
+					text-align: center;
+					margin: 0px auto;
+					margin-top: 120px;
+					border: 4px groove #6a0ba5;
+					border-radius: 15px;
+					background-color: rgba(76,190,200,0.64);
+					height: 150px; /* Высота блока */
+					width: 300px; /* Ширина блока */
+					
+				}	#massege {
+						margin: 0px auto;
+						margin-top: 24px;
+						height: 50px; /* Высота блока */
+						width: 280px; /* Ширина блока */
+						
+					}	#div_message, #div_in_name{
+							font-size: larger;
+							font-style: italic;
+							font-weight: bold;
+							background-color: rgba(76,189,199,0);
+							height: 50px; /* Высота блока */
+							width: 280px; /* Ширина блока */
+							color: blue;
+							
+						}	#inp_inp_name {
+								width: 100px; /* Ширина блока */
+							}
+							
+							.inp {
+								text-align: left;
+								color: blue;
+							}
+			/* ----------------------------------- */
+
+			
+			
+			
+			#rating {
+				
+				right: 274px; /* Положение */ /* 83px */
+				position: absolute;
+				
+				height: 408px; /* Высота блока */
+				width: 230px; /* Ширина блока */
+				margin-top: -408px;
+				margin-right: -306px;
+				
+				/* Переход */
+			     -webkit-transition: right 0.3s ease-out 0.1s;
+			     -moz-transition: right 0.3s ease-out 0.1s;
+			     -o-transition: right 0.3s ease-out 0.1s;
+			     transition: right 0.3s ease-out 0.1s;
+			     z-index: 1
+			     
+			}	#inrating {		
+					position: inherit;
+					float: left;
+					background-color: rgba(105,159,222,1);
+					border-right: 2px;
+					height: 400px; /* Высота блока */
+					width: 192px; /* Ширина блока */
+					border: 4px solid #00125c;
+					border-bottom-right-radius: 11px;
+					border-top-right-radius: 11px;
+					
+					z-index: 3;
+					
+				}	#title {
+						background-color: rgba(117,205,234,0.64);
+						height: 0px; /* Высота блока */
+						width: 182px; /* Ширина блока */
+						margin-left: 10px;
+						text-decoration: underline;
+						color: #0e1abb;
+					}
+					
+					#res_time {
+						margin: 0px auto;
+						height: 372px; /* Высота блока */
+						width: 182px; /* Ширина блока */
+						background-color: rgba(105,159,222,1);
+						border-radius: 8px;
+						padding: 5px;
+						padding-top: 23px;
+						
+					}	.name_and_time {
+							text-align: center;
+							float: left;
+							height: 20px; /* Высота блока */
+							width: 180px; /* Ширина блока */
+							background-color: rgba(162,203,86,0.64);
+							border-radius: 10px;
+							border: 1px solid #b373c0;
+						}
+						
+				.img1 {
+					position: relative;
+					float: right;
+					
+					margin-top: 6px;
+					margin-right: 2px;
+					z-index: 4;
+				}
+		
+
+
+.img2, .img {
+	height: 30px; /* Высота блока */
+	width: 398px; /* Ширина блока */
 }
 
-#flap {
+.img1, .img3 {
+	height: 394px; /* Высота блока */
+	width: 30px; /* Ширина блока */
+}
+
+.img2 {
 	position: absolute;
-	height: 408px;
-	width: 408px;
-	background-color:rgba(28,28,28,0.57);
-	border-radius: 8px;
+	margin-left: 6px;
+	top: 433px;
 }
 
-#time {
-	cursor: pointer;
-	background-color:red;
-	height: 20px;
-	width: 192px;
-	border-radius: 8px;
-}
 
-.rating {
-	float: left;
-	background-color: rgba(94,156,248,0.81);
-	height: 400px;
-	width: 192px;
-	border: 4px solid #00125c;
-	border-radius: 11px;
-}
 
-#res_time {
-	margin: 0px auto;
-	height: 358px; /* Высота блока */
-	width: 182px; /* Ширина блока */
-	background-color: rgba(176,65,158,0.68);
-	border-radius: 8px;
-	padding: 5px;
-	padding-top: 18px;
-	
-}
 
-#title {
-	background-color: rgba(117,205,234,0.64);
-	height: 0px; /* Высота блока */
-	width: 182px; /* Ширина блока */
-	text-decoration: underline;
-	color: #0e1abb;
-}
 
-.name_and_time {
-	float: left;
-	height: 20px; /* Высота блока */
-	width: 180px; /* Ширина блока */
-	background-color: rgba(162,203,86,0.64);
-	border-radius: 10px;
-	border: 1px solid #b373c0;
-}
 
-#div_form {
-	margin: 0px auto;
-	margin-top: 120px;
-	border: 4px groove #6a0ba5;
-	border-radius: 15px;
-	background-color: rgba(76,190,200,0.64);
-	height: 150px; /* Высота блока */
-	width: 300px; /* Ширина блока */
-}
 
-#div_message, #div_in_name{
-	font-size: larger;
-	font-style: italic;
-	font-weight: bold;
-	background-color: rgba(76,189,199,0);
-	height: 50px; /* Высота блока */
-	width: 280px; /* Ширина блока */
-	color: blue;
-	
 
-}
-#inp_inp_name {
-	width: 100px; /* Ширина блока */
-}
-#massege {
-	margin: 0px auto;
-	margin-top: 24px;
-	height: 50px; /* Высота блока */
-	width: 280px; /* Ширина блока */
-}
+
+
+
+
 
