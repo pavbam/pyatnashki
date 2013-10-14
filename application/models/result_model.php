@@ -2,7 +2,8 @@
 
 class Result_model extends CI_Model {
 
-	function get_rating() {		
+	function get_rating() {	
+		$this->db->order_by('time','asc');	
 		$query = $this->db->get('result_game');
 		return $query->result_array();
 	}

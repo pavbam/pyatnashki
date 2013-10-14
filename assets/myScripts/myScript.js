@@ -45,6 +45,7 @@ function removeChildren(node) {
 
 /* ФУНКЦИЯ создания нового поля игры */
 function newGame(arr) {
+	document.getElementById("timer").innerHTML = "00:00";
 	document.getElementById("flap").style.display ="none";
 	names = 'false';
 	myAjax(minutes, seconds, false);
@@ -80,6 +81,12 @@ function newGame(arr) {
 	
 	/* запоминаем позиции в массиве - таблице */
 	copuInBackArr (back_arr);
+	var iframe = document.createElement('iframe');
+	var img = document.getElementsByClassName('img2');
+	iframe.frameborder = "1";
+	iframe.scrolling = "no";
+	iframe.src = "http://lovi.fm/mini/?c=4&a=0&r=1&h=165&s=1093,1274,1351,1704,673,255,1523,1624,35,1247,92";
+	document.getElementById('radio').insertBefore(iframe, img);
 }
 
 /* ФУНКЦИЯ копирования id эллементов в массив - таблицу */
@@ -116,6 +123,7 @@ function moveCell(id_first, name){
 			
 			/* запускасем таймер */
 			if (ms_start == undefined) {
+				$("#head_intime").animate({marginBottom:"28px"},500);
 				ms_start = true;
 				start();
 			}
@@ -140,21 +148,21 @@ function moveCell(id_first, name){
 			var str = back_arr.join(); // массив - таблицу переводим в строку
 			/* сравниваем с тестовой строкой */
 			if (str === test_str) {
-				
+				$("#head_intime").animate({marginBottom:"0px"},500);
 				stop();
 			
 				/* если не управился в 60 сек. добавляем значение: минуты */
 				if (minutes > 0) {				
 					win_text = win_text + minutes + " мин. " + seconds + " сек.\nвведите ваше имя для сохранения результата!";
 				} else win_text = win_text + seconds + "сек.";
-				setTimeout('document.getElementById("time").innerHTML = "<strong>Новая игра</strong>"', 150);
 				/* выводим поздравления и колличество затраченного времени с небольшой задержкой */
 				setTimeout('aj(minutes, seconds)', 150);
-				/* закрываем поле для предотвращения случайных нажатий */
+				/* закрываем поле от случайных нажатий */
 				div_flap = document.getElementById("flap");
 				
 				setTimeout('div_flap.style.display ="block"', 140);
-				setTimeout('document.getElementById("div_form").style.display ="block"', 160);
+				
+/* 				setTimeout('document.getElementById("div_form").style.display ="block"', 160); */
 			}
 			return 0;
 		} 
@@ -164,6 +172,8 @@ function moveCell(id_first, name){
 function aj(minutes, seconds) {
 
 	document.getElementById("div_message").innerHTML = win_text;
+	$("#div_form").fadeIn( 2000 );
+	
 	document.getElementById('inp_inp_name').focus();
 	win_text = "ПОЗДРАВЛЯЕМ<br />Вы справились за ";
 
@@ -206,7 +216,7 @@ function myAjax(minutes, seconds, inp) {
 	});
 	
 	document.getElementById("div_form").style.display ="none";
-	
+	color_anime();
 	seconds = 0;
 	minutes = 0;
 }
@@ -217,23 +227,29 @@ var radio_i = false;
 function rating_move(id) {
 	var rat = document.getElementById(id);
 	if (id == "rating") {
-		if (rating == false) {
-			rat.style.right = "83px";
-			setTimeout('document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/close.png"', 400);
-			rating = true;
-		} else {
-			rat.style.right = "274px";
-			setTimeout('document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/open.png"', 400);
-			rating = false;
+	
+		if (rating == false) {			
+			$("#rating").animate({marginRight:"-497px"},800,function () {
+				document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/close.png";
+				rating = true;
+			});						
+		} else {		
+			$("#rating").animate({marginRight:"-306px"},800,function () {
+				document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/open.png";
+				rating = false;
+			});
 		}
+		
 	} else {
+	
 		if (radio_i == false) {
-			rat.style.top = "426px";
+			$("#radio").animate({marginTop:"164px"},800);
 			radio_i = true;
 		} else {
-			rat.style.top = "262px";
+			$("#radio").animate({marginTop:"0px"},800);
 			radio_i = false;
 		}
+		
 	}
 }
 
@@ -310,7 +326,7 @@ function startTime() {
 	minutes = +minutes;
 	if (minutes < 10) minutes = "0" + minutes;
 
-	document.getElementById("time").innerHTML = minutes + ":" + seconds;
+	document.getElementById("timer").innerHTML = minutes + ":" + seconds;
 	
 	setTimeout("startTime()", 1000);
 }
@@ -321,4 +337,13 @@ function stop() {
 function start() {
 	stops = 1;
 	startTime();
+}
+
+/* смена цвета текста */
+function color_anime(){ 
+    $('#time').animateColorText({
+        speed   : 1000,
+        delay   : 200,
+        colorTo : '#de3394'
+    });
 }

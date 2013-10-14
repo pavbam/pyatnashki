@@ -1,5 +1,5 @@
 body {
-	background-color: rgba(138,151,119,0.87);
+	background-color: rgba(10,223,227,1);
 	
 }	#conteiner {
 		position: relative;
@@ -12,49 +12,76 @@ body {
 	}	h1 {
 			text-align: center;
 			color: blue;
+			
 		}
 		
 		.gm {
 			position: inherit;
-			float: right 25%;
+			top: 40px;
 			margin: 0px auto;
-			height: 445px; /* Высота блока */
+			height: 408px; /* Высота блока */
 			width: 408px; /* Ширина блока */
 			background-color: rgba(82,65,176,0);
 			
-		}	.img3 {
+		}	#head_intime {
 				position: absolute;
-				float: left;
-				margin-top: 35px;
-					margin-left: -28px;
-			}
-
-			
-			#head {
-				position: inherit;
-				background-color: rgba(199,76,199,0);
-				text-align: center;
-				height: 25px; /* Высота блока */
+				bottom: 370px;
+				margin-bottom: 0px;
+				height: 66px; /* Высота блока */
 				width: 408px; /* Ширина блока */
-				z-index: 0;
-				
-			}	#intime {
-					position: absolute;
-					height: 20px;
-					width: 408px;
-					margin-top: 7px;
+				z-index: 2;
+			
+			}	#head {
+					position: inherit;
+					left: 4px;
+					background-color: rgba(199,76,199,0);
+					text-align: center;
+					height: 25px; /* Высота блока */
+					width: 400px; /* Ширина блока */
+					z-index: 2;
 					
-				}	#time {
-						text-align: center;
-						margin: 0px auto;
-						cursor: pointer;
+				}	#intime {
+						position: absolute;
 						height: 20px;
-						width: 192px;			
+						width: 408px;
+						margin-top: 7px;
+						
+					}	#time {
+							text-align: center;
+							margin: 0px auto;
+							margin-top: -7px;
+							cursor: pointer;
+							height: 20px;
+							width: 192px;	
+							font-size: 25px;
+							  color:#1f5bb0;
+							  text-shadow:0 0 3px #de3394; 		
+						}
+					.img {
+						height: 30px; /* Высота блока */
+						width: 396px; /* Ширина блока */
 					}
+				#timer {
+					position: absolute;
+					top: 28px;
+					text-align: center;
+					height: 30px; /* Высота блока */
+					width: 400px; /* Ширина блока */
+					background-color: rgba(105,159,222,1);
+					border: 4px solid #00125c;
+					border-top-left-radius: 11px;
+					border-top-right-radius: 11px;
+					font-size: 25px;
+					color: white;
+					z-index: 1;
+				}
+			
+			
 					
 							/* ------------------------------ */
 			#game_place {
-				position: inherit;
+				position: absolute;
+				top: 0px;
 				margin-top: 2px;
 				height: 400px; /* Высота блока */
 				width: 400px; /* Ширина блока */
@@ -87,12 +114,18 @@ body {
 					border-color: rgba(255,255,255,0);
 					
 				}
+			.img3 {
+				position: absolute;
+				left: -30px;
+				top: 9px;
+				
+			}
 			/* ------------------------------ */
 			#flap {
 				position: absolute;
 				height: 408px;
 				width: 408px;
-				margin-top: -408px;
+				margin-top: 2px;
 				background-color:rgba(28,28,28,0.57);
 				border-radius: 10px;
 				z-index: 20;
@@ -139,24 +172,16 @@ body {
 				
 				right: 274px; /* Положение */ /* 83px */
 				position: absolute;
-				
+				top: 0px;
 				height: 408px; /* Высота блока */
 				width: 230px; /* Ширина блока */
-				margin-top: -408px;
 				margin-right: -306px;
-				
-				/* Переход */
-			     -webkit-transition: right 0.3s ease-out 0.1s;
-			     -moz-transition: right 0.3s ease-out 0.1s;
-			     -o-transition: right 0.3s ease-out 0.1s;
-			     transition: right 0.3s ease-out 0.1s;
-			     z-index: 1
+			    z-index: 1
 			     
 			}	#inrating {		
 					position: inherit;
 					float: left;
 					background-color: rgba(105,159,222,1);
-/* 					border-right: 2px; */
 					height: 400px; /* Высота блока */
 					width: 192px; /* Ширина блока */
 					border: 4px solid #00125c;
@@ -236,7 +261,7 @@ body {
 				border: 4px solid #00125c;
 				border-bottom-left-radius: 5px;
 				border-bottom-right-radius: 5px;
-				top: 262px;
+				top: 236px;
 				/* Переход */
 			     -webkit-transition: top 0.3s ease-out 0.1s;
 			     -moz-transition: top 0.3s ease-out 0.1s;
@@ -248,6 +273,8 @@ body {
 			}  	iframe {
 					position: absolute;
 					border: 1px solid #00135d;
+					left: 0px;
+					top: 0px;
 					overflow: hidden;
 					height: 163px;
 					width: 398px; 
@@ -257,7 +284,7 @@ body {
 				.img2 {
 					position: relative;
 					margin-left: -2px;
-					top: 167px;
+					top: 168px;
 					height: 30px; /* Высота блока */
 					width: 402px; /* Ширина блока */
 					z-index: 3;
@@ -268,7 +295,7 @@ body {
 					height: 20px; /* Высота блока */
 					width: 80px; /* Ширина блока */
 					float: left;
-					margin-top: 135px;
+					margin-top: 137px;
 					margin-left: 160px;
 					cursor: pointer;
 					z-index: 4;
@@ -276,10 +303,7 @@ body {
 		
 
 
-.img {
-	height: 30px; /* Высота блока */
-	width: 398px; /* Ширина блока */
-}
+
 
 .img1, .img3 {
 	height: 394px; /* Высота блока */
