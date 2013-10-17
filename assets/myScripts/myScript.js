@@ -161,50 +161,22 @@ function moveCell(id_first, name){
 
 			
 			if (i == 0) {
-				$("#" + id_first).animate({"left": "+=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#" + id_first).animate({"left": "+=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
 				$("#cell_not").animate({"left": "-=100px"}, 100).attr("class", "cell y" + y + " x" + x);
-				replacement();
 			}
 			if (i == 1) {
-				$("#" + id_first).animate({"top": "+=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#" + id_first).animate({"top": "+=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
 				$("#cell_not").animate({"top": "-=100px"}, 100).attr("class", "cell y" + y + " x" + x);
-				replacement();
 			}
 			if (i == 2) {
-				$("#" + id_first).animate({"left": "-=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#" + id_first).animate({"left": "-=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
 				$("#cell_not").animate({"left": "+=100px"}, 100).attr("class", "cell y" + y + " x" + x);
-				replacement();
 			}
 			if (i == 3) {
-				$("#" + id_first).animate({"top": "-=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#" + id_first).animate({"top": "-=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
 				$("#cell_not").animate({"top": "+=100px"}, 100).attr("class", "cell y" + y + " x" + x);
-				replacement();
 			}
-			
-			
-			
-						
-	/////////////////////////////////////////////////////////////////
-			/* получаем атрибуты */
-	//		var div_first_position = document.getElementById(id_first);
-	//		var div_new_position = document.getElementById(id);
-	//		var id1 = div_first_position.id, name_class1 = div_first_position.className, val1 = div_first_position.innerHTML;
-	//		var id2 = div_new_position.id, name_class2 = div_new_position.className, val2 = div_new_position.innerHTML;
-						
-			/* меняем местами */
-	//		div_first_position.id = id2;
-	//		div_first_position.className = name_class1;
-	//		div_first_position.innerHTML = val2;		
-			
-	//		back_arr[y][x] = id2; //фиксируем изменения в массиве - таблице
-			
-	//		div_new_position.id = id1;
-	//		div_new_position.className = name_class2;
-	//		div_new_position.innerHTML = val1;
-	//		back_arr[ y_arr[i] ][ x_new[i] ] = id1; //фиксируем изменения в массиве - таблице
-	////////////////////////////////////////////////////////////////////////////
-			
-			/* проверка на окончание игры */
+
 			
 			return 0;
 		} 
@@ -387,9 +359,11 @@ function stop() {
 	stops = 0;
 }
 function start() {
+	if (stops == 1) return 0;
 	stops = 1;
 	startTime();
 }
+
 
 /* смена цвета текста */
 function color_anime(){ 
