@@ -11,6 +11,9 @@ var sec = "", min = "";
 var win_text = "ПОЗДРАВЛЯЕМ<br />Вы справились за ";
 var base_url = 'http://localhost:8888/pyatnashki/';
 var names;
+
+
+
 /* ФУНКЦИЯ получегия случайного целого числа из диапазона */
 function random(min, max) {
     var range = max - min + 1;
@@ -45,8 +48,10 @@ function removeChildren(node) {
 
 /* ФУНКЦИЯ создания нового поля игры */
 function newGame(arr) {
+	$("#head_intime").animate({marginBottom:"0px"},500);
+	stop();
 	document.getElementById("timer").innerHTML = "00:00";
-	document.getElementById("flap").style.display ="none";
+	
 	names = 'false';
 	myAjax(minutes, seconds, false);
 	
@@ -62,6 +67,7 @@ function newGame(arr) {
 	
 	/* вписываем эллементы (фишки) в страницу */
 	/* фишки с номерами от 1 до 15 */
+//	var c = 0;
 	for (var c = 0; c < 15; c++) {
 		var div = document.createElement('div');
 		div.className = 'cell';
@@ -76,7 +82,6 @@ function newGame(arr) {
 	div_false.className = 'cell';
 	div_false.onclick = "moveCell(id, className)";
 	div_false.id = "cell_not";
-	div_false.setAttribute("onclick", "moveCell(id, className)");
 	game_place.appendChild(div_false);
 	
 	/* запоминаем позиции в массиве - таблице */
@@ -96,18 +101,46 @@ function copuInBackArr (arr) {
 	var i = 0;
 	for (var y = 0; y < 4; y++) {
 		for (var x = 0; x < 4; x++) {
-			cild[i].className = cild[i].className + " " + y + " " + x;
-			arr[y].push(cild[i].id);
+			if (cild[i] == "cell_not") { 
+				arr[y].push("cell_not");
+			} else {
+				cild[i].className = cild[i].className + " y" + y + " x" + x;
+				arr[y].push(cild[i].id);
+			} 
 			i++;
 		}
 	}	
 }
 
+
+
 /* ФУНКЦИЯ обработки нажатия на фишку */
 function moveCell(id_first, name){
+
+	function replacement() {
+		back_arr[ y_arr[i] ][ x_new[i] ] = id_first;
+		back_arr[ y ][ x ] = "cell_not";
+		inspection();
+	}
+	function inspection() {
+		var str = back_arr.join(); // массив - таблицу переводим в строку
+		console.log(test_str);  // ! CONSOLE ! 
+		/* сравниваем с тестовой строкой */
+		if (str === test_str) {
+			$("#head_intime").animate({marginBottom:"0px"},500);
+			stop();
+		
+			/* если не управился в 60 сек. добавляем значение: минуты */
+			if (minutes > 0) {				
+				win_text = win_text + minutes + " мин. " + seconds + " сек.\nвведите ваше имя для сохранения результата!";
+			} else win_text = win_text + seconds + "сек.";
+			/* выводим поздравления и колличество затраченного времени с небольшой задержкой */
+			aj(minutes, seconds);
+		}
+	}
 	
 	/* координаты нажатой фишки */
-	var y = name[5], x = name[7];
+	var y = name[6], x = name[9];
 	/* массивы с координатами перемешений для проверки соседних фишек */
 	var y_arr = [y, +y+1, y, +y-1], x_new = [+x+1, x, +x-1, x];
 	/* обходим вокруг фишки */
@@ -122,56 +155,85 @@ function moveCell(id_first, name){
 		if (id === "cell_not") {
 			
 			/* запускасем таймер */
-			if (ms_start == undefined) {
-				$("#head_intime").animate({marginBottom:"28px"},500);
-				ms_start = true;
-				start();
+			$("#head_intime").animate({marginBottom:"28px"}, 500);
+			ms_start = true;
+			start();
+
+			
+			if (i == 0) {
+				$("#" + id_first).animate({"left": "+=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"left": "-=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				replacement();
+			}
+			if (i == 1) {
+				$("#" + id_first).animate({"top": "+=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"top": "-=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				replacement();
+			}
+			if (i == 2) {
+				$("#" + id_first).animate({"left": "-=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"left": "+=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				replacement();
+			}
+			if (i == 3) {
+				$("#" + id_first).animate({"top": "-=100px"}, 500).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"top": "+=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				replacement();
 			}
 			
-			/* получаем атрибуты */
-			var div_first_position = document.getElementById(id_first);
-			var div_new_position = document.getElementById(id);
-			var id1 = div_first_position.id, name_class1 = div_first_position.className, val1 = div_first_position.innerHTML;
-			var id2 = div_new_position.id, name_class2 = div_new_position.className, val2 = div_new_position.innerHTML;
-			/* меняем местами */
-			div_first_position.id = id2;
-			div_first_position.className = name_class1;
-			div_first_position.innerHTML = val2;
-			back_arr[y][x] = id2; //фиксируем изменения в массиве - таблице
 			
-			div_new_position.id = id1;
-			div_new_position.className = name_class2;
-			div_new_position.innerHTML = val1;
-			back_arr[ y_arr[i] ][ x_new[i] ] = id1; //фиксируем изменения в массиве - таблице
+			
+						
+	/////////////////////////////////////////////////////////////////
+			/* получаем атрибуты */
+	//		var div_first_position = document.getElementById(id_first);
+	//		var div_new_position = document.getElementById(id);
+	//		var id1 = div_first_position.id, name_class1 = div_first_position.className, val1 = div_first_position.innerHTML;
+	//		var id2 = div_new_position.id, name_class2 = div_new_position.className, val2 = div_new_position.innerHTML;
+						
+			/* меняем местами */
+	//		div_first_position.id = id2;
+	//		div_first_position.className = name_class1;
+	//		div_first_position.innerHTML = val2;		
+			
+	//		back_arr[y][x] = id2; //фиксируем изменения в массиве - таблице
+			
+	//		div_new_position.id = id1;
+	//		div_new_position.className = name_class2;
+	//		div_new_position.innerHTML = val1;
+	//		back_arr[ y_arr[i] ][ x_new[i] ] = id1; //фиксируем изменения в массиве - таблице
+	////////////////////////////////////////////////////////////////////////////
 			
 			/* проверка на окончание игры */
-			var str = back_arr.join(); // массив - таблицу переводим в строку
-			/* сравниваем с тестовой строкой */
-			if (str === test_str) {
-				$("#head_intime").animate({marginBottom:"0px"},500);
-				stop();
 			
-				/* если не управился в 60 сек. добавляем значение: минуты */
-				if (minutes > 0) {				
-					win_text = win_text + minutes + " мин. " + seconds + " сек.\nвведите ваше имя для сохранения результата!";
-				} else win_text = win_text + seconds + "сек.";
-				/* выводим поздравления и колличество затраченного времени с небольшой задержкой */
-				setTimeout('aj(minutes, seconds)', 150);
-				/* закрываем поле от случайных нажатий */
-				div_flap = document.getElementById("flap");
-				
-				setTimeout('div_flap.style.display ="block"', 140);
-				
-/* 				setTimeout('document.getElementById("div_form").style.display ="block"', 160); */
-			}
 			return 0;
 		} 
 	}
 }
 
+function keyDown(event) {
+   var key = event.keyCode;
+   if (key==13) {
+   		myAjax(minutes, seconds, undefined);
+   }
+   if (key==27) {
+   		inp_not();
+   		event.preventDefault();//запрет на дальнейшее распространение
+   		return false;//возвращаем false
+   }
+}
+
+function inp_not() {
+	 
+	$("#div_form").fadeOut( 1000 );
+	$("#flap").fadeOut(2000);
+	newGame(start_arr);
+}
+
 function aj(minutes, seconds) {
 
 	document.getElementById("div_message").innerHTML = win_text;
+	$("#flap").fadeIn("slow");
 	$("#div_form").fadeIn( 2000 );
 	
 	document.getElementById('inp_inp_name').focus();
@@ -187,11 +249,12 @@ function myAjax(minutes, seconds, inp) {
 		if (temp == "") {
 			alert("Забыли ввести имя!");
 			return;
-		} else names = temp;
+		} else {
+			names = temp;
+			inp_not();
+		}
 		
 	}
-//	else names = false;
-	
 	
 	$.ajax({
 			type: "post",
@@ -215,7 +278,7 @@ function myAjax(minutes, seconds, inp) {
 			}
 	});
 	
-	document.getElementById("div_form").style.display ="none";
+//	document.getElementById("div_form").style.display ="none";
 	color_anime();
 	seconds = 0;
 	minutes = 0;
@@ -230,12 +293,12 @@ function rating_move(id) {
 	
 		if (rating == false) {			
 			$("#rating").animate({marginRight:"-497px"},800,function () {
-				document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/close.png";
+				document.open_png.src = base_url + "assets/img/close.png";
 				rating = true;
 			});						
 		} else {		
 			$("#rating").animate({marginRight:"-306px"},800,function () {
-				document.open_png.src = "http://localhost:8888/pyatnashki/assets/img/open.png";
+				document.open_png.src = base_url + "assets/img/open.png";
 				rating = false;
 			});
 		}
@@ -288,23 +351,12 @@ function newSet() {
 	seconds = 0, minutes = 0, hours = 0;
 	back_arr = [ [], [], [], [] ]; // очищаем массив - таблицу
 	ms_start = undefined;
-//	win_text = "ПОЗДРАВЛЯЕМ\nВы справились за ";
 //	start_arr = shuffle(arr); // перемешиваем массив ячеек
 	var game_place = document.getElementById("game_place");
 	removeChildren(game_place);	// удаляем все дочерние эллементы
 }
 
-function keyDown(event) {
-   var key = event.keyCode;
-   if (key==13) {
-   		myAjax(minutes, seconds, undefined);
-   }
-   if (key==27) {
-   		document.getElementById('div_form').style.display ='none';
-   		event.preventDefault();//запрет на дальнейшее распространение
-   		return false;//возвращаем false
-   }
-}
+
 
 
 

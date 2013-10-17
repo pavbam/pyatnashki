@@ -91,7 +91,8 @@ body {
 				z-index: 4;
 				
 			}	.cell {
-					float: left;
+					position: absolute;
+					
 					background-color:#dfc5e8;
 					height: 98px;
 					width: 98px;
@@ -107,13 +108,46 @@ body {
 					user-select: none;
 
 				}
+			
 				
 				#cell_not {
-					
+					top: 300px;
+					left: 300px;
+					position: absolute;
 					background-color:rgba(255,255,255,0);
 					border-color: rgba(255,255,255,0);
-					
+					cursor: default;
 				}
+				
+				div [class~="y0"]{
+					top: 0px;
+				}
+				div [class~="y1"]{
+					top: 100px;
+				}
+				div [class~="y2"]{
+					top: 200px;
+				}
+				div [class~="y3"]{
+					top: 300px;
+				}
+				
+				div [class~="x0"]{
+					left: 0px;
+				}
+				div [class~="x1"]{
+					left: 100px;
+				}
+				div [class~="x2"]{
+					left: 200px;
+				}
+				div [class~="x3"]{
+					left: 300px;
+				}
+				
+				
+				
+				
 			.img3 {
 				position: absolute;
 				left: -30px;

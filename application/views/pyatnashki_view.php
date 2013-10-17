@@ -41,7 +41,7 @@
 				        	<div id="div_in_name">
 					        	Ваше имя <input id="inp_inp_name" onkeydown="keyDown(event)" autofocus="">
 					        	<div id="div_buttons">
-						        	<input id="inp_not" type="button" value="отказаться" onclick="document.getElementById('div_form').style.display ='none'">
+						        	<input id="inp_not" type="button" value="отказаться" onclick="inp_not()">
 						        	<input id="inp_ok" type="button" value="отправить" onclick="myAjax(minutes, seconds, undefined)">
 						        	
 					        	</div>
