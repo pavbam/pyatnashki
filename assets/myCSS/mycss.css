@@ -44,14 +44,14 @@ body {
 						position: absolute;
 						height: 20px;
 						width: 408px;
-						margin-top: 7px;
+						top: 7px;
 						
 					}	#time {
 							text-align: center;
 							margin: 0px auto;
-							margin-top: -7px;
+							margin-top: -5px;
 							cursor: pointer;
-							height: 20px;
+							height: 25px;
 							width: 192px;	
 							font-size: 25px;
 							  color:#1f5bb0;

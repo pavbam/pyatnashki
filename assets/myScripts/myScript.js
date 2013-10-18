@@ -1,29 +1,33 @@
 /* массив диапазона чисел */
 var start_arr = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15];
+
 /* массив - таблица */
 var back_arr = [ [], [], [], [] ];
+
 /* проверочная строка */
 var test_str = "cell_1,cell_2,cell_3,cell_4,cell_5,cell_6,cell_7,cell_8,cell_9,cell_10,cell_11,cell_12,cell_13,cell_14,cell_15,cell_not";
 
-var ms_start = undefined;
-var sec = "", min = "";
 /* выводимая строка при правильном расскладе фишек */
 var win_text = "ПОЗДРАВЛЯЕМ<br />Вы справились за ";
 var base_url = 'http://localhost:8888/pyatnashki/';
 var names;
+var seconds = 0;
+var minutes = 0;
+var stops = 1;
+var rating = 0;
 
 
 
-/* ФУНКЦИЯ получегия случайного целого числа из диапазона */
+/*! получегия случайного целого числа из диапазона */
 function random(min, max) {
     var range = max - min + 1;
     return Math.floor(Math.random()*range) + min;
 }			
 
-/* ФУНКЦИЯ перемешивания массива */
+/*! перемешивания массива */
 function shuffle(arr) {
     var r_i; // случайный индекс
-    var v; // временная переÏменная
+    var v; // временная переменная
     for (var i = 0; i < arr.length-1; i++) {
         /* получаем случайный индекс (кроме последнего) */
         r_i = random(0, arr.length-1);
@@ -35,31 +39,26 @@ function shuffle(arr) {
     return arr;
 }
 
-function reloadPage(){
-window.location.reload()
-}
-
-/* ФУНКЦИЯ удаления всех доченних эллементов */
+/*! удаления всех доченних эллементов */
 function removeChildren(node) {
     while(node.childNodes[0]){
 		node.removeChild(node.childNodes[0]);
 	}
 }
 
-/* ФУНКЦИЯ создания нового поля игры */
+/*! создания нового поля игры */
 function newGame(arr) {
 	$("#head_intime").animate({marginBottom:"0px"},500);
 	stop();
 	document.getElementById("timer").innerHTML = "00:00";
 	
 	names = 'false';
-	myAjax(minutes, seconds, false);
+	myStartAjax();
 	
 	stop();
 	seconds = 0, minutes = 0, hours = 0;
 	back_arr = [ [], [], [], [] ]; // очищаем массив - таблицу
-	ms_start = undefined;
-	
+
 //	start_arr = shuffle(arr); // перемешиваем массив ячеек
 	var game_place = document.getElementById("game_place");
 	removeChildren(game_place);	// удаляем все дочерние эллементы
@@ -67,7 +66,6 @@ function newGame(arr) {
 	
 	/* вписываем эллементы (фишки) в страницу */
 	/* фишки с номерами от 1 до 15 */
-//	var c = 0;
 	for (var c = 0; c < 15; c++) {
 		var div = document.createElement('div');
 		div.className = 'cell';
@@ -86,15 +84,9 @@ function newGame(arr) {
 	
 	/* запоминаем позиции в массиве - таблице */
 	copuInBackArr (back_arr);
-	var iframe = document.createElement('iframe');
-	var img = document.getElementsByClassName('img2');
-	iframe.frameborder = "1";
-	iframe.scrolling = "no";
-	iframe.src = "http://lovi.fm/mini/?c=4&a=0&r=1&h=165&s=1093,1274,1351,1704,673,255,1523,1624,35,1247,92";
-	document.getElementById('radio').insertBefore(iframe, img);
 }
 
-/* ФУНКЦИЯ копирования id эллементов в массив - таблицу */
+/*! копирования id эллементов в массив - таблицу */
 function copuInBackArr (arr) {
 	var game_place = document.getElementById("game_place");
 	var cild = game_place.childNodes;
@@ -114,7 +106,7 @@ function copuInBackArr (arr) {
 
 
 
-/* ФУНКЦИЯ обработки нажатия на фишку */
+/*! обработки нажатия на фишку */
 function moveCell(id_first, name){
 
 	function replacement() {
@@ -124,7 +116,6 @@ function moveCell(id_first, name){
 	}
 	function inspection() {
 		var str = back_arr.join(); // массив - таблицу переводим в строку
-		console.log(test_str);  // ! CONSOLE ! 
 		/* сравниваем с тестовой строкой */
 		if (str === test_str) {
 			$("#head_intime").animate({marginBottom:"0px"},500);
@@ -156,52 +147,55 @@ function moveCell(id_first, name){
 			
 			/* запускасем таймер */
 			$("#head_intime").animate({marginBottom:"28px"}, 500);
-			ms_start = true;
 			start();
-
 			
 			if (i == 0) {
-				$("#" + id_first).animate({"left": "+=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
-				$("#cell_not").animate({"left": "-=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				$("#" + id_first).animate({"left": "+=100px"}, 250).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"left": "-=100px"}, 10).attr("class", "cell y" + y + " x" + x);
+				replacement();
 			}
 			if (i == 1) {
-				$("#" + id_first).animate({"top": "+=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
-				$("#cell_not").animate({"top": "-=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				$("#" + id_first).animate({"top": "+=100px"}, 250).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"top": "-=100px"}, 10).attr("class", "cell y" + y + " x" + x);
+				replacement();
 			}
 			if (i == 2) {
-				$("#" + id_first).animate({"left": "-=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
-				$("#cell_not").animate({"left": "+=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				$("#" + id_first).animate({"left": "-=100px"}, 250).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"left": "+=100px"}, 10).attr("class", "cell y" + y + " x" + x);
+				replacement();
 			}
 			if (i == 3) {
-				$("#" + id_first).animate({"top": "-=100px"}, 500, function () {replacement();}).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
-				$("#cell_not").animate({"top": "+=100px"}, 100).attr("class", "cell y" + y + " x" + x);
+				$("#" + id_first).animate({"top": "-=100px"}, 250).attr("class", "cell y" + y_arr[i] + " x" + x_new[i]);
+				$("#cell_not").animate({"top": "+=100px"}, 10).attr("class", "cell y" + y + " x" + x);
+				replacement();
 			}
-
-			
 			return 0;
 		} 
 	}
 }
 
+/* ! отлов нажатия ESC, ENTER */
 function keyDown(event) {
    var key = event.keyCode;
    if (key==13) {
    		myAjax(minutes, seconds, undefined);
    }
    if (key==27) {
-   		inp_not();
+   		onceAgain();
    		event.preventDefault();//запрет на дальнейшее распространение
    		return false;//возвращаем false
    }
 }
 
-function inp_not() {
+/* ! закрытие диалоговой формы и запуск новой игры */
+function onceAgain() {
 	 
 	$("#div_form").fadeOut( 1000 );
 	$("#flap").fadeOut(2000);
 	newGame(start_arr);
 }
 
+/* ! открытия диалоговой формы */
 function aj(minutes, seconds) {
 
 	document.getElementById("div_message").innerHTML = win_text;
@@ -213,21 +207,35 @@ function aj(minutes, seconds) {
 
 }
 
-function myAjax(minutes, seconds, inp) {
-	
-	var names = false;
-	if (inp == undefined) {
-		var temp = document.getElementById("inp_inp_name").value;
-		if (temp == "") {
-			alert("Забыли ввести имя!");
-			return;
-		} else {
-			names = temp;
-			inp_not();
-		}
-		
-	}
-	
+/* ! ajax без отсылки данных */
+function myStartAjax() {
+	$.ajax({
+			type: "post",
+			url: base_url + "index.php/ajax/get_db",
+			cache: false,				
+			success: function(json) {						
+				try{		
+					var obj = jQuery.parseJSON(json);
+					show_rating(obj);
+				}catch(e) {		
+					alert('Неизвестная ошибка запроса..');
+				}		
+			},
+			error: function() {						
+				alert('Ошибка запроса..');
+			}
+	});
+}
+
+/* ! ajax с отсылкой данных */
+function myAjax(minutes, seconds) {
+
+	var names = document.getElementById("inp_inp_name").value;
+	if (names == "") {
+		alert("Забыли ввести имя!");
+		return;
+	} else onceAgain();
+
 	$.ajax({
 			type: "post",
 			url: base_url + "index.php/ajax/upd_bd",
@@ -242,52 +250,35 @@ function myAjax(minutes, seconds, inp) {
 					var obj = jQuery.parseJSON(json);
 					show_rating(obj);
 				}catch(e) {		
-					alert('Exception while request..');
+					alert('Неизвестная ошибка запроса..');
 				}		
 			},
 			error: function() {						
-				alert('Error while request..');
+				alert('Ошибка запроса..');
 			}
 	});
 	
-//	document.getElementById("div_form").style.display ="none";
-	color_anime();
 	seconds = 0;
 	minutes = 0;
 }
 
-/* открытие и закрытие панелей */
-var rating = false;
-var radio_i = false;
+/*! открытие и закрытие панелей */
 function rating_move(id) {
-	var rat = document.getElementById(id);
-	if (id == "rating") {
-	
-		if (rating == false) {			
-			$("#rating").animate({marginRight:"-497px"},800,function () {
-				document.open_png.src = base_url + "assets/img/close.png";
-				rating = true;
-			});						
-		} else {		
-			$("#rating").animate({marginRight:"-306px"},800,function () {
-				document.open_png.src = base_url + "assets/img/open.png";
-				rating = false;
-			});
-		}
-		
-	} else {
-	
-		if (radio_i == false) {
-			$("#radio").animate({marginTop:"164px"},800);
-			radio_i = true;
-		} else {
-			$("#radio").animate({marginTop:"0px"},800);
-			radio_i = false;
-		}
-		
+
+	if (rating == 0) {			
+		$("#rating").animate({marginRight:"-497px"},800,function () {
+			document.open_png.src = base_url + "assets/img/close.png";
+			rating = 1;
+		});						
+	} else {		
+		$("#rating").animate({marginRight:"-306px"},800,function () {
+			document.open_png.src = base_url + "assets/img/open.png";
+			rating = 0;
+		});
 	}
 }
 
+/* ! заполнение рейтинга */
 function show_rating(obj) {
 
 	var result = document.getElementById('res_time');
@@ -318,25 +309,7 @@ function show_rating(obj) {
 	
 }
 
-function newSet() {
-	stop();
-	seconds = 0, minutes = 0, hours = 0;
-	back_arr = [ [], [], [], [] ]; // очищаем массив - таблицу
-	ms_start = undefined;
-//	start_arr = shuffle(arr); // перемешиваем массив ячеек
-	var game_place = document.getElementById("game_place");
-	removeChildren(game_place);	// удаляем все дочерние эллементы
-}
-
-
-
-
-
-var seconds = 0;
-var minutes = 0;
-
-var stops = 1;
-
+/* ! запуск таймера */
 function startTime() {
 	if (stops == 0) {
 		return 0;
@@ -352,6 +325,7 @@ function startTime() {
 
 	document.getElementById("timer").innerHTML = minutes + ":" + seconds;
 	
+	stops = 0;
 	setTimeout("startTime()", 1000);
 }
 
@@ -359,17 +333,6 @@ function stop() {
 	stops = 0;
 }
 function start() {
-	if (stops == 1) return 0;
 	stops = 1;
 	startTime();
-}
-
-
-/* смена цвета текста */
-function color_anime(){ 
-    $('#time').animateColorText({
-        speed   : 1000,
-        delay   : 200,
-        colorTo : '#de3394'
-    });
 }

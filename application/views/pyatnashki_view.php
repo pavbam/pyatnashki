@@ -4,9 +4,6 @@
         <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
         <title>игра "пятнашки"</title>
 		<script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
-		<script src="<?=base_url();?>assets/JqweryScripts/jquery.min.v1.4.2.js" type="text/javascript"></script>
-		<script src="<?=base_url();?>assets/JqweryScripts/jquery.animateColorText.js" type="text/javascript"></script>
-		<script src="<?=base_url();?>assets/JqweryScripts/jquery.animate-colors-min.js" type="text/javascript"></script>
 		
         <link href="<?=base_url();?>assets/myCSS/mycss.css" rel="stylesheet" type="text/css" media="screen, projection"/>
         <script src="<?=base_url();?>assets/myScripts/myScript.js"></script>              
@@ -41,7 +38,7 @@
 				        	<div id="div_in_name">
 					        	Ваше имя <input id="inp_inp_name" onkeydown="keyDown(event)" autofocus="">
 					        	<div id="div_buttons">
-						        	<input id="inp_not" type="button" value="отказаться" onclick="inp_not()">
+						        	<input id="inp_not" type="button" value="отказаться" onclick="onceAgain()">
 						        	<input id="inp_ok" type="button" value="отправить" onclick="myAjax(minutes, seconds, undefined)">
 						        	
 					        	</div>
@@ -52,7 +49,6 @@
 	        	</div>	        	
 	        	<div id="radio">
 					<img class="img2" src="<?=base_url();?>assets/img/bort2.png">
-					<img class="radio" title="радио" src="<?=base_url();?>assets/img/radio.png" onclick="rating_move('radio')">
 	        	</div>		       
 				<div class="rating" id="rating">
 		    		<div id="inrating">
